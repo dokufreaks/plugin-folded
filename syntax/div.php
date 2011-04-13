@@ -28,21 +28,6 @@ if (!isset($plugin_folded_string_set)) $plugin_folded_string_set = false;
  */
 class syntax_plugin_folded_div extends DokuWiki_Syntax_Plugin {
 
-   /**
-    * return some info
-    */
-    function getInfo(){
-        return array(
-            'author' => 'Fabian van-de-l_Isle',
-            'email'  => 'webmaster@lajzar.co.uk',
-            'date'   => '2008-08-13',
-            'name'   => 'Folded Plugin - Block',
-            'desc'   => 'Enable blocks of folded text. 
-                         Syntax: ++++title|folded content++++',
-            'url'    => 'http://www.dokuwiki.org/plugin:folded',
-        );
-    }
-
     function getType(){ return 'container'; }
     function getPType() { return 'block'; }
     function getAllowedTypes() { return array('container','substition','protected','disabled','formatting'); }

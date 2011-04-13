@@ -30,21 +30,6 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
 
    var $register_hook = false;
 
-   /**
-    * return some info
-    */
-    function getInfo(){
-        return array(
-            'author' => 'Fabian van-de-l_Isle',
-            'email'  => 'webmaster@lajzar.co.uk',
-            'date'   => '2008-08-13',
-            'name'   => 'Folded Plugin – Inline',
-            'desc'   => 'Enable inline folded text. 
-                         Syntax: ++title|folded content++',
-            'url'    => 'http://www.dokuwiki.org/plugin:folded',
-        );
-    }
-
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('substition','protected','disabled','formatting'); }
     function getSort(){ return 405; }
