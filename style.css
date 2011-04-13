@@ -1,0 +1,27 @@
+.folder {
+    padding-left: 2px;
+    padding-right: 9px;
+    background: url(closed.gif) no-repeat right center;
+}
+
+.folder.open {
+    background: url(open.gif) no-repeat right center;
+}
+
+div.folded {
+    padding: 0.5em;
+    border: 1px dotted __medium__;
+}
+
+span.folded {
+    border: 1px dotted __medium__;
+}
+
+span.indicator {
+    visibility: hidden;
+}
+
+/* below style rules are created by javascript
+.folded.hidden { display: none; }
+.folder span.indicator { visibility: visible; }
+*/
