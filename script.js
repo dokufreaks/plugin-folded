@@ -14,8 +14,16 @@ jQuery(function($) {
 	// containers for localised reveal/hide strings,
 	// populated from html comments in hidden elements on the page
 	// TODO: is there better way?
-	var folded_reveal = $('#folded_reveal').html().match(/^<!-- (.*) -->$/)[1] || 'reveal';
-	var folded_hide = $('#folded_hide').html().match(/^<!-- (.*) -->$/)[1] || 'hide';
+	function translate(div, def) {
+		var $div = $(div);
+		if ($div.length) {
+			return $div.html().match(/^<!-- (.*) -->$/)[1];
+		}
+		return def;
+	}
+
+	var folded_reveal = translate('#folded_reveal', 'reveal');
+	var folded_hide = translate('#folded_hide', 'hide');
 
 	/*
 	 * toggle the folded element via className change also adjust the classname and
