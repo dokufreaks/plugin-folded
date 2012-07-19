@@ -6,7 +6,9 @@
  * @author Schplurtz le Déboulonné <schplurtz [At] laposte [doT] net>
  */
 
-// containers for localised reveal/hide strings, 
+jQuery(function() {
+
+// containers for localised reveal/hide strings,
 // populated from html comments in hidden elements on the page
 var folded_reveal = 'reveal';
 var folded_hide = 'hide';
@@ -16,7 +18,7 @@ var folded_hide = 'hide';
  * title tooltip on the folding link
  */
 function folded_toggle(evt) {
-    id = this.href.match(/(#.*)$/)[1];
+    var id = this.href.match(/(#.*)$/)[1];
     var n = jQuery(id);
 
     if (n.hasClass('hidden')) {
@@ -24,7 +26,7 @@ function folded_toggle(evt) {
     } else {
         n.addClass('hidden').removeClass('open');
     }
-    
+
     evt.preventDefault();
     return false;
 }
@@ -32,7 +34,6 @@ function folded_toggle(evt) {
 /*
  * run on document load, setup everything we need
  */
-jQuery(function() {
     var n = jQuery('#folded_reveal');
     if (!n) return;
 
