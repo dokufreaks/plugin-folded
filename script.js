@@ -7,11 +7,15 @@
  */
 
 jQuery(function() {
+/*
+ * run on document load, setup everything we need
+ */
 
 // containers for localised reveal/hide strings,
 // populated from html comments in hidden elements on the page
-var folded_reveal = 'reveal';
-var folded_hide = 'hide';
+// TODO: is there better way?
+folded_reveal = jQuery('#folded_reveal').html().match(/^<!-- (.*) -->$/)[1] || 'reveal';
+folded_hide = jQuery('#folded_hide').html().match(/^<!-- (.*) -->$/)[1] || 'hide';
 
 /*
  * toggle the folded element via className change also adjust the classname and
@@ -31,21 +35,6 @@ function folded_toggle(evt) {
     return false;
 }
 
-/*
- * run on document load, setup everything we need
- */
-    var n = jQuery('#folded_reveal');
-    if (!n) return;
-
-    n.each(function() {
-        folded_reveal = this.innerHTML.match(/^<!-- (.*) -->$/)[1];
-    });
-
-    n = jQuery('#folded_hide');
-
-    n.each(function() {
-        folded_hide = this.innerHTML.match(/^<!-- (.*) -->$/)[1];
-    });
     jQuery('.dokuwiki .folder').click(folded_toggle);
 });
 
