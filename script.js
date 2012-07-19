@@ -6,46 +6,44 @@
  * @author Schplurtz le Déboulonné <schplurtz [At] laposte [doT] net>
  */
 
-// containers for localised reveal/hide strings, 
-// populated from html comments in hidden elements on the page
-var folded_reveal = 'reveal';
-var folded_hide = 'hide';
+jQuery(function($) {
+	/*
+	 * run on document load, setup everything we need
+	 */
 
-/*
- * toggle the folded element via className change also adjust the classname and
- * title tooltip on the folding link
- */
-function folded_toggle(evt) {
-    id = this.href.match(/(#.*)$/)[1];
-    var n = jQuery(id);
+	// containers for localised reveal/hide strings,
+	// populated from html comments in hidden elements on the page
+	// TODO: is there better way?
+	function translate(div, def) {
+		var $div = $(div);
+		if ($div.length) {
+			return $div.html().match(/^<!-- (.*) -->$/)[1];
+		}
+		return def;
+	}
 
-    if (n.hasClass('hidden')) {
-        n.addClass('open').removeClass('hidden');
-    } else {
-        n.addClass('hidden').removeClass('open');
-    }
-    
-    evt.preventDefault();
-    return false;
-}
+	var folded_reveal = translate('#folded_reveal', 'reveal');
+	var folded_hide = translate('#folded_hide', 'hide');
 
-/*
- * run on document load, setup everything we need
- */
-jQuery(function() {
-    var n = jQuery('#folded_reveal');
-    if (!n) return;
+	/*
+	 * toggle the folded element via className change also adjust the classname and
+	 * title tooltip on the folding link
+	 */
+	function folded_toggle(evt) {
+		var id = this.href.match(/(#.*)$/)[1];
+		var $id = $(id);
 
-    n.each(function() {
-        folded_reveal = this.innerHTML.match(/^<!-- (.*) -->$/)[1];
-    });
+		if ($id.hasClass('hidden')) {
+			$id.addClass('open').removeClass('hidden');
+		} else {
+			$id.addClass('hidden').removeClass('open');
+		}
 
-    n = jQuery('#folded_hide');
+		evt.preventDefault();
+		return false;
+	}
 
-    n.each(function() {
-        folded_hide = this.innerHTML.match(/^<!-- (.*) -->$/)[1];
-    });
-    jQuery('.dokuwiki .folder').click(folded_toggle);
+    $('.dokuwiki .folder').click(folded_toggle);
 });
 
 // support graceful js degradation, this hides the folded blocks from view

@@ -1,7 +1,7 @@
 base   folded
 author Fabian van-de-l_Isle, Christopher Smith, Esther Brunner
 email  wikidesign@gmail.com
-date   2011-12-26
+date   2012-07-19
 name   folded plugin
 desc   Foldable page sections
 url    http://dokuwiki.org/plugin:folded
