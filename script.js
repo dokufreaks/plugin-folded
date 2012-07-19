@@ -6,7 +6,7 @@
  * @author Schplurtz le Déboulonné <schplurtz [At] laposte [doT] net>
  */
 
-jQuery(function() {
+jQuery(function($) {
 	/*
 	 * run on document load, setup everything we need
 	 */
@@ -14,8 +14,8 @@ jQuery(function() {
 	// containers for localised reveal/hide strings,
 	// populated from html comments in hidden elements on the page
 	// TODO: is there better way?
-	var folded_reveal = jQuery('#folded_reveal').html().match(/^<!-- (.*) -->$/)[1] || 'reveal';
-	var folded_hide = jQuery('#folded_hide').html().match(/^<!-- (.*) -->$/)[1] || 'hide';
+	var folded_reveal = $('#folded_reveal').html().match(/^<!-- (.*) -->$/)[1] || 'reveal';
+	var folded_hide = $('#folded_hide').html().match(/^<!-- (.*) -->$/)[1] || 'hide';
 
 	/*
 	 * toggle the folded element via className change also adjust the classname and
@@ -23,19 +23,19 @@ jQuery(function() {
 	 */
 	function folded_toggle(evt) {
 		var id = this.href.match(/(#.*)$/)[1];
-		var n = jQuery(id);
+		var $id = $(id);
 
-		if (n.hasClass('hidden')) {
-			n.addClass('open').removeClass('hidden');
+		if ($id.hasClass('hidden')) {
+			$id.addClass('open').removeClass('hidden');
 		} else {
-			n.addClass('hidden').removeClass('open');
+			$id.addClass('hidden').removeClass('open');
 		}
 
 		evt.preventDefault();
 		return false;
 	}
 
-    jQuery('.dokuwiki .folder').click(folded_toggle);
+    $('.dokuwiki .folder').click(folded_toggle);
 });
 
 // support graceful js degradation, this hides the folded blocks from view
