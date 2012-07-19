@@ -7,33 +7,33 @@
  */
 
 jQuery(function() {
-/*
- * run on document load, setup everything we need
- */
+	/*
+	 * run on document load, setup everything we need
+	 */
 
-// containers for localised reveal/hide strings,
-// populated from html comments in hidden elements on the page
-// TODO: is there better way?
-folded_reveal = jQuery('#folded_reveal').html().match(/^<!-- (.*) -->$/)[1] || 'reveal';
-folded_hide = jQuery('#folded_hide').html().match(/^<!-- (.*) -->$/)[1] || 'hide';
+	// containers for localised reveal/hide strings,
+	// populated from html comments in hidden elements on the page
+	// TODO: is there better way?
+	var folded_reveal = jQuery('#folded_reveal').html().match(/^<!-- (.*) -->$/)[1] || 'reveal';
+	var folded_hide = jQuery('#folded_hide').html().match(/^<!-- (.*) -->$/)[1] || 'hide';
 
-/*
- * toggle the folded element via className change also adjust the classname and
- * title tooltip on the folding link
- */
-function folded_toggle(evt) {
-    var id = this.href.match(/(#.*)$/)[1];
-    var n = jQuery(id);
+	/*
+	 * toggle the folded element via className change also adjust the classname and
+	 * title tooltip on the folding link
+	 */
+	function folded_toggle(evt) {
+		var id = this.href.match(/(#.*)$/)[1];
+		var n = jQuery(id);
 
-    if (n.hasClass('hidden')) {
-        n.addClass('open').removeClass('hidden');
-    } else {
-        n.addClass('hidden').removeClass('open');
-    }
+		if (n.hasClass('hidden')) {
+			n.addClass('open').removeClass('hidden');
+		} else {
+			n.addClass('hidden').removeClass('open');
+		}
 
-    evt.preventDefault();
-    return false;
-}
+		evt.preventDefault();
+		return false;
+	}
 
     jQuery('.dokuwiki .folder').click(folded_toggle);
 });
