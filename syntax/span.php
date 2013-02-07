@@ -28,8 +28,6 @@ if (!isset($plugin_folded_string_set)) $plugin_folded_string_set = false;
  */
 class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
 
-   var $register_hook = false;
-
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('substition','protected','disabled','formatting'); }
     function getSort(){ return 405; }
@@ -42,15 +40,6 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
     function handle($match, $state, $pos, &$handler){
         if ($state == DOKU_LEXER_ENTER){
             $match = trim(substr($match,2,-1)); // strip markup
-            $handler->status['plugin_folded'] = true;
-
-            if (!$this->register_hook) {
-
-              global $EVENT_HANDLER;
-              $EVENT_HANDLER->register_hook('PARSER_HANDLER_DONE','BEFORE', $this, 'add_writestrings');
-
-              $this->register_hook = true;
-            }
         } else if ($state == DOKU_LEXER_UNMATCHED) {
             $handler->_addCall('cdata',array($match), $pos);
             return false;
@@ -62,7 +51,7 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
     * Create output
     */
     function render($mode, &$renderer, $data) {
-        global $plugin_folded_count, $plugin_folded_strings_set;
+        global $plugin_folded_count;
 
         if (empty($data)) return false;
         list($state, $cdata) = $data;
@@ -86,39 +75,11 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
               case DOKU_LEXER_EXIT:
                 $renderer->doc .= '</span>';
                 break;
-
-              case 'WRITE_STRINGS' :
-                if (!$plugin_folded_strings_set) {
-
-                  $hide = $this->getConf('hide') ? $this->getConf('hide') : $this->getLang('hide');
-                  $reveal = $this->getConf('reveal') ? $this->getConf('reveal') : $this->getLang('reveal');
-
-                  $renderer->doc .= '<span id="folded_reveal" style="display:none;"><!-- '.hsc($reveal).' --></span>';
-                  $renderer->doc .= '<span id="folded_hide" style="display:none;"><!-- '.hsc($hide).' --></span>';
-
-                  $plugin_folded_strings_set = true;
-                }
             }
             return true;
         } else {
             if ($cdata) $renderer->cdata($cdata);
         }
         return false;
-    }
-    
-    function add_writestrings(&$event, $param) {
-
-      if (isset($event->plugin_folded)) return;
-
-      // make sure the event is being generated for the handler instance we expect
-      $handler =& $event->data;
-      if (empty($handler->status['plugin_folded'])) return;
-
-      // add WRITE_STRINGS instruction to the end of the instruction list
-      $last_call = end($handler->calls);
-      array_push($handler->calls, array('plugin', array('folded_span', array('WRITE_STRINGS',0), DOKU_LEXER_MATCHED), $last_call[2]));
-
-      // prevent multiple handling of this event by folded plugin components
-      $event->plugin_folded = true;
     }
 }

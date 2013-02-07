@@ -4,48 +4,42 @@
  * @author Fabian van-de-l_Isle <webmaster [at] lajzar [dot] co [dot] uk>
  * @author Christopher Smith <chris [at] jalakai [dot] co [dot] uk>
  * @author Schplurtz le Déboulonné <schplurtz [At] laposte [doT] net>
+ * @author Michael Hamann <michael@content-space.de>
  */
 
-// containers for localised reveal/hide strings, 
-// populated from html comments in hidden elements on the page
-var folded_reveal = 'reveal';
-var folded_hide = 'hide';
-
-/*
- * toggle the folded element via className change also adjust the classname and
- * title tooltip on the folding link
- */
-function folded_toggle(evt) {
-    id = this.href.match(/(#.*)$/)[1];
-    var n = jQuery(id);
-
-    if (n.hasClass('hidden')) {
-        n.addClass('open').removeClass('hidden');
-    } else {
-        n.addClass('hidden').removeClass('open');
-    }
-    
-    evt.preventDefault();
-    return false;
-}
 
 /*
  * run on document load, setup everything we need
  */
 jQuery(function() {
-    var n = jQuery('#folded_reveal');
-    if (!n) return;
+    // containers for localised reveal/hide strings,
+    // populated from the content set by the action plugin
+    var folded_reveal = JSINFO['plugin_folded']['reveal'];
+    var folded_hide = JSINFO['plugin_folded']['hide'];
 
-    n.each(function() {
-        folded_reveal = this.innerHTML.match(/^<!-- (.*) -->$/)[1];
+    /*
+     * toggle the folded element via className change also adjust the classname and
+     * title tooltip on the folding link
+     */
+    jQuery('.dokuwiki .folder').click(function folded_toggle(evt) {
+        var id = this.href.match(/(#.*)$/)[1];
+        var n = jQuery(id);
+
+        if (n.hasClass('hidden')) {
+            n.addClass('open').removeClass('hidden');
+            jQuery(this)
+                .addClass('open')
+                .attr('title', folded_hide);
+        } else {
+            n.addClass('hidden').removeClass('open');
+            jQuery(this)
+                .removeClass('open')
+                .attr('title', folded_reveal);
+        }
+
+        evt.preventDefault();
+        return false;
     });
-
-    n = jQuery('#folded_hide');
-
-    n.each(function() {
-        folded_hide = this.innerHTML.match(/^<!-- (.*) -->$/)[1];
-    });
-    jQuery('.dokuwiki .folder').click(folded_toggle);
 });
 
 // support graceful js degradation, this hides the folded blocks from view
