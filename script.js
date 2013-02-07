@@ -23,15 +23,15 @@ jQuery(function() {
      */
     jQuery('.dokuwiki .folder').click(function folded_toggle(evt) {
         var id = this.href.match(/(#.*)$/)[1];
-        var n = jQuery(id);
+        var $id = jQuery(id);
 
-        if (n.hasClass('hidden')) {
-            n.addClass('open').removeClass('hidden');
+        if ($id.hasClass('hidden')) {
+            $id.addClass('open').removeClass('hidden');
             jQuery(this)
                 .addClass('open')
                 .attr('title', folded_hide);
         } else {
-            n.addClass('hidden').removeClass('open');
+            $id.addClass('hidden').removeClass('open');
             jQuery(this)
                 .removeClass('open')
                 .attr('title', folded_reveal);

@@ -63,7 +63,7 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
                 $renderer->doc .= '<a class="folder" href="#folded_'.$plugin_folded_count.'">';
 
                 if ($cdata)
-                    $renderer->doc .= ' '.$renderer->_xmlEntities($cdata);
+                    $renderer->doc .= ' '.$renderer->cdata($cdata);
 
                 $renderer->doc .= '</a><span class="folded hidden" id="folded_'.$plugin_folded_count.'">';
                 break;
