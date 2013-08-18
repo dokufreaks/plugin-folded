@@ -17,6 +17,8 @@ jQuery(function() {
     var folded_reveal = JSINFO['plugin_folded']['reveal'];
     var folded_hide = JSINFO['plugin_folded']['hide'];
 
+    jQuery('a.folder[href*="#folded_"]').attr('title', folded_reveal);
+
     /*
      * toggle the folded element via className change also adjust the classname and
      * title tooltip on the folding link
