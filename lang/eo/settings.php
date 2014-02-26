@@ -5,5 +5,5 @@
  * 
  * @author Robert Bogenschneider <bogi@uea.org>
  */
-$lang['hide']                  = 'Helpindiko por kaŝi<br />(lasu malplena por uzi tradukon)';
-$lang['reveal']                = 'Helpindiko por malkaŝi<br />(lasu malplena por uzi tradukon)';
+$lang['hide']                  = 'Konsilveziko por kaŝi<br />(lasu malplena por uzi tradukitan tekston)';
+$lang['reveal']                = 'Konsilveziko por malkaŝi<br />(lasu malplena por uzi tradukitan tekston)';
