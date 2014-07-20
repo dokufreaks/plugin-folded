@@ -37,7 +37,7 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
    /**
     * Handle the match
     */
-    function handle($match, $state, $pos, &$handler){
+    function handle($match, $state, $pos, Doku_Handler $handler){
         if ($state == DOKU_LEXER_ENTER){
             $match = trim(substr($match,2,-1)); // strip markup
         } else if ($state == DOKU_LEXER_UNMATCHED) {
@@ -50,7 +50,7 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
    /**
     * Create output
     */
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         global $plugin_folded_count;
 
         if (empty($data)) return false;
