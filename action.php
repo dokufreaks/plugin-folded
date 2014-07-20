@@ -16,7 +16,7 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
      *
      * @param Doku_event_handler $controller The event controller
      */
-    function register(&$controller) {
+    function register(Doku_Event_Handler $controller) {
         $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addhidereveal');
     }
 
