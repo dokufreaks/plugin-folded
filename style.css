@@ -2,6 +2,7 @@
     padding-left: 2px;
     padding-right: 9px;
     background: url(closed.gif) no-repeat right center;
+    cursor: pointer;
 }
 
 .folder.open {
