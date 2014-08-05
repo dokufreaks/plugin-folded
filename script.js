@@ -18,14 +18,14 @@ jQuery(function() {
     var folded_reveal = JSINFO['plugin_folded']['reveal'];
     var folded_hide = JSINFO['plugin_folded']['hide'];
 
-    jQuery('a.folder').attr('title', folded_reveal);
+    jQuery('.dokuwiki a.folder').attr('title', folded_reveal);
 
 
     // Click event for a.folder.
-    jQuery("a.folder").click(function() {
+    jQuery(".dokuwiki a.folder").click(function() {
        // index for a.folder and div.folded
-        var num = jQuery("a.folder").index(this);
-        var item = jQuery("div.folded").eq(num);
+        var num = jQuery(".dokuwiki a.folder").index(this);
+        var item = jQuery(".dokuwiki .folded").eq(num);
         if(item.hasClass('hidden')){
           item.addClass('open').removeClass('hidden');
           item.addClass('open')
