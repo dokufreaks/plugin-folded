@@ -1,12 +1,12 @@
 .folder {
     padding-left: 2px;
     padding-right: 9px;
-    background: url(closed.gif) no-repeat right center;
+    background: url(img/closed.gif) no-repeat right center;
     cursor: pointer;
 }
 
 .folder.open {
-    background: url(open.gif) no-repeat right center;
+    background: url(img/open.gif) no-repeat right center;
 }
 
 div.folded {

@@ -17,6 +17,7 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
      * @param Doku_event_handler $controller The event controller
      */
     function register(Doku_Event_Handler $controller) {
+        $controller->register_hook('TOOLBAR_DEFINE', 'AFTER', $this, 'handle_toolbar', array ());
         $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addhidereveal');
     }
 
@@ -36,5 +37,30 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
             'hide' => $hide,
             'reveal' => $reveal
         );
+    }
+    function handle_toolbar(&$event, $param) {
+        $event->data[] = array (
+                'type' => 'picker',
+                'title' => 'Folded plugin',
+                'icon' => '../../plugins/folded/img/closed_div.png',
+                'list' => array(
+                        array(
+                                'type'   => 'format',
+                                'title'  => 'folder div',
+                                'icon'   => '../../plugins/folded/img/closed_div.png',
+                                'open'   => '++++ ',
+                                'close'  => '|\n(folded text)\n++++\n',
+                        ),
+                        array(
+                                'type'   => 'format',
+                                'title'  => 'folder span',
+                                'icon'   => '../../plugins/folded/img/closed_span.png',
+                                'open'   => '++',
+                                'close'  => '|(folded text)++',
+                        ),
+                ),
+
+        );
+
     }
 }
