@@ -7,8 +7,8 @@
  */
 
 // custom language strings for the plugin
-$lang['reveal']     = '顯示';
-$lang['reveallong'] = '顯示隱藏內容';
+$lang['reveal']     = '显示';
+$lang['reveallong'] = '显示隐藏内容';
 
 $lang['hide']       = '隐藏';
 $lang['hidelong']   = '隐藏内容';
