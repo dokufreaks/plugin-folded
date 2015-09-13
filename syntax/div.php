@@ -109,10 +109,10 @@ class syntax_plugin_folded_div extends DokuWiki_Syntax_Plugin {
                     break;
                 }
             case DOKU_LEXER_UNMATCHED: // defensive, shouldn't occur
-                    $renderer->p_open();
-                    $renderer->cdata($cdata);
-                    $renderer->p_close();
-                    break;
+                $renderer->p_open();
+                $renderer->cdata($cdata);
+                $renderer->p_close();
+                break;
             case DOKU_LEXER_EXIT:
                 $renderer->doc .= '</div>';
                 break;
