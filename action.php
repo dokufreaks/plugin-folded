@@ -49,18 +49,18 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
         // Each title matched is splitted in an array like this:
         //     array {
         //         [1] => <p>
-        //         [2] => \s or \t between zero or unlimited times
+        //         [2] => any of \w\d\s\t between zero or unlimited times
         //         [3] => = between one or unlimited times
         //         [4] => title
         //         [5] => = between one or unlimited times
-        //         [6] => \s or \t between zero or unlimited times
+        //         [6] => any of \w\d\s\t between zero or unlimited times
         //         [7] => </p>
         //     }
         // The relation between the number of equal signs (=) and the relative
         // tag <h*> is the following:
         //    <h1>  | <h2>  | <h3>  | <h4>  | <h5>
         //    = * 6 | = * 5 | = * 4 | = * 3 | = * 2
-        $re = '/(<p>)([\s\n]*)([=]+)(.*?)([=]+)([\s\n]*)(<\/p>)/';
+        $re = '/(<p>)([\w\d\s\n]*)([=]+)(.*?)([=]+)([\w\d\s\n]*)(<\/p>)/';
         $xhtml = $event->data;
 
         function rewriteTagTitle($match) {
@@ -72,10 +72,22 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
                 '==' => '5'
             );
             if ($match[3] === $match[5]) {
-                $match[1] = '<h' . $level[$match[3]] . '>';
-                $match[7] = '</h' . $level[$match[5]] . '>';
-                $match[3] = '';
-                $match[5] = '';
+                if (ctype_graph($match[2]) == true) {
+                    $match[2] = $match[2] . '</p>';
+                }
+                else {
+                    $match[1] = '';
+                    $match[2] = '';
+                }
+                $match[3] = '<h' . $level[$match[3]] . '>';
+                $match[5] = '</h' . $level[$match[5]] . '>';
+                if (ctype_graph($match[6]) == true) {
+                    $match[6] = '<p>' . $match[6];
+                }
+                else {
+                    $match[6] = '';
+                    $match[7] = '';
+                }
             }
             return $match[1] . $match[2] . $match[3] . $match[4] . $match[5] . $match[6] . $match[7];
         }
