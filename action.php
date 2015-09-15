@@ -49,11 +49,11 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
         // Each title matched is splitted in an array like this:
         //     array {
         //         [1] => <p>
-        //         [2] => any of \w\d\s\t between zero or unlimited times
+        //         [2] => any of \w\d\s\n between zero or unlimited times
         //         [3] => = between one or unlimited times
         //         [4] => title
         //         [5] => = between one or unlimited times
-        //         [6] => any of \w\d\s\t between zero or unlimited times
+        //         [6] => any of \w\d\s\n between zero or unlimited times
         //         [7] => </p>
         //     }
         // The relation between the number of equal signs (=) and the relative
@@ -61,7 +61,6 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
         //    <h1>  | <h2>  | <h3>  | <h4>  | <h5>
         //    = * 6 | = * 5 | = * 4 | = * 3 | = * 2
         $re = '/(<p>)([\w\d\s\n]*)([=]+)(.*?)([=]+)([\w\d\s\n]*)(<\/p>)/';
-        $xhtml = $event->data;
 
         function rewriteTagTitle($match) {
             $level = array (
@@ -92,6 +91,6 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
             return $match[1] . $match[2] . $match[3] . $match[4] . $match[5] . $match[6] . $match[7];
         }
 
-        $event->data = preg_replace_callback($re, 'rewriteTagTitle', $xhtml);
+        $event->data = preg_replace_callback($re, 'rewriteTagTitle', $event->data);
     }
 }

@@ -45,7 +45,7 @@ class syntax_plugin_folded_div extends DokuWiki_Syntax_Plugin {
         // addPattern
         //    (?<![\+])         negative lookbehind: doesn't match if before there is a +
         //    \+{3}             matches the character +, 3 times
-        //    (?![\+])          negative lookahead: doesn't match if bafter there is a +
+        //    (?![\+])          negative lookahead: doesn't match if after there is a +
         //    (?![\s\w]*?\|)    negative lookahead: doesn't match if after there is a |
         $this->Lexer->addEntryPattern('\+{4}[^\+]*?\|(?=.*?\+{4})', $mode, 'plugin_folded_div');
         $this->Lexer->addPattern('\+{3}[^\+]*?\|', 'plugin_folded_div');
@@ -85,13 +85,6 @@ class syntax_plugin_folded_div extends DokuWiki_Syntax_Plugin {
 
         switch ($state) {
             case DOKU_LEXER_ENTER:
-                $plugin_folded_count++;
-                $renderer->doc .= '<p><a class="folder" href="#folded_' . $plugin_folded_count . '">';
-                if ($cdata) {
-                    $renderer->doc .= ' ' . $renderer->cdata($cdata);
-                }
-                $renderer->doc .= '</a></p><div class="folded hidden" id="folded_' . $plugin_folded_count . '">';
-                break;
             case DOKU_LEXER_MATCHED:
                 if ($cdata !== '+++') {
                     $plugin_folded_count++;
