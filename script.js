@@ -1,6 +1,7 @@
 /*
  * For Folded Text Plugin
  *
+ * @author Ikuo Obataya <i.obataya [at] gmail.com>
  * @author Fabian van-de-l_Isle <webmaster [at] lajzar [dot] co [dot] uk>
  * @author Christopher Smith <chris [at] jalakai [dot] co [dot] uk>
  * @author Schplurtz le Déboulonné <schplurtz [At] laposte [doT] net>
@@ -17,30 +18,23 @@ jQuery(function() {
     var folded_reveal = JSINFO['plugin_folded']['reveal'];
     var folded_hide = JSINFO['plugin_folded']['hide'];
 
-    jQuery('a.folder[href*="#folded_"]').attr('title', folded_reveal);
+    jQuery('.dokuwiki a.folder').attr('title', folded_reveal);
 
-    /*
-     * toggle the folded element via className change also adjust the classname and
-     * title tooltip on the folding link
-     */
-    jQuery('.dokuwiki .folder').click(function folded_toggle(evt) {
-        var id = this.href.match(/(#.*)$/)[1];
-        var $id = jQuery(id);
 
-        if ($id.hasClass('hidden')) {
-            $id.addClass('open').removeClass('hidden');
-            jQuery(this)
-                .addClass('open')
-                .attr('title', folded_hide);
-        } else {
-            $id.addClass('hidden').removeClass('open');
-            jQuery(this)
-                .removeClass('open')
-                .attr('title', folded_reveal);
+    // Click event for a.folder.
+    jQuery(".dokuwiki a.folder").click(function() {
+       // index for a.folder and div.folded
+        var num = jQuery(".dokuwiki a.folder").index(this);
+        var item = jQuery(".dokuwiki .folded").eq(num);
+        if(item.hasClass('hidden')){
+          item.addClass('open').removeClass('hidden');
+          item.addClass('open')
+              .attr('title', folded_hide);
+        }else{
+          item.addClass('hidden').removeClass('open');
+          item.removeClass('open')
+              .attr('title', folded_reveal);
         }
-
-        evt.preventDefault();
-        return false;
     });
 });
 
