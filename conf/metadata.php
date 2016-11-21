@@ -6,3 +6,4 @@
  */
 $meta['hide']  = array('string');
 $meta['reveal'] = array('string');
+$meta['unfold_default'] = array('onoff');
