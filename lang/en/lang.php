@@ -13,4 +13,5 @@ $lang['reveallong'] = 'reveal hidden content';
 $lang['hide']       = 'hide';
 $lang['hidelong']   = 'hide content';
 
+$lang['fold_unfold_all_button'] = 'Fold/unfold all';
 //Setup VIM: ex: et ts=2 enc=utf-8 :

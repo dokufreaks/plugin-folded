@@ -44,6 +44,55 @@ jQuery(function() {
     });
 });
 
+function fold_unfold_all() {
+    var hide = -1;
+    var cpt = 1;
+
+    var folders = document.getElementsByClassName("folder");
+    var i;
+    for (i = 0; i < folders.length; i++) {
+        if (hide == -1) {
+            if (folders[i].className.search("open") == -1) {
+                hide = 0;
+            } else {
+                hide = 1;
+            }
+        }
+
+        if (hide == 1) {
+            folders[i].className = folders[i].className.replace(/open/g, "");
+        } else {
+            folders[i].className = folders[i].className + " open";
+        }
+
+    }
+
+    // get first folded_ object
+    var obj = document.getElementById("folded_" + cpt++);
+    while ( obj != null ) {
+
+        // initially, find out whether we want to hide or unhide
+        //if (hide == -1) {
+        //    if (obj.className.search("hidden") == -1) {
+        //        hide = 1;
+        //    } else {
+        //        hide = 0;
+        //    }
+        //}
+
+        if (hide == 1) {
+            obj.className = obj.className.replace(/open/g, "");
+            obj.className = obj.className + " hidden";
+        } else {
+            obj.className = obj.className.replace(/hidden/g, "");
+            obj.className = obj.className + " open";
+        }
+
+        // get next folded_ object
+        obj = document.getElementById("folded_" + cpt++);
+    }
+}
+
 // support graceful js degradation, this hides the folded blocks from view
 // before they are shown,
 // whilst still allowing non-js user to see any folded content.
