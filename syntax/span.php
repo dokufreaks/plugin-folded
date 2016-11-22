@@ -60,7 +60,11 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
             switch ($state){
                case DOKU_LEXER_ENTER:
                 $plugin_folded_count++;
-                $renderer->doc .= '<a class="folder" href="#folded_'.$plugin_folded_count.'">';
+                if ($this->getConf('unfold_default')) {
+                    $renderer->doc .= '<a class="folder open" href="#folded_'.$plugin_folded_count.'">';
+                } else {
+                    $renderer->doc .= '<a class="folder" href="#folded_'.$plugin_folded_count.'">';
+                }
 
                 if ($cdata)
                     $renderer->doc .= ' '.$renderer->cdata($cdata);
