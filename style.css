@@ -21,7 +21,7 @@ span.indicator {
     visibility: hidden;
 }
 
-/* export icon */
+/* fold/unfold all button in pagetools area */
 #dokuwiki__pagetools ul li a.fold_unfold_all {
     background-position: right 0;
 }

@@ -51,6 +51,7 @@ function fold_unfold_all() {
     var folders = document.getElementsByClassName("folder");
     var i;
     for (i = 0; i < folders.length; i++) {
+        // initially, find out whether we want to hide or unhide
         if (hide == -1) {
             if (folders[i].className.search("open") == -1) {
                 hide = 0;
@@ -70,16 +71,6 @@ function fold_unfold_all() {
     // get first folded_ object
     var obj = document.getElementById("folded_" + cpt++);
     while ( obj != null ) {
-
-        // initially, find out whether we want to hide or unhide
-        //if (hide == -1) {
-        //    if (obj.className.search("hidden") == -1) {
-        //        hide = 1;
-        //    } else {
-        //        hide = 0;
-        //    }
-        //}
-
         if (hide == 1) {
             obj.className = obj.className.replace(/open/g, "");
             obj.className = obj.className + " hidden";
