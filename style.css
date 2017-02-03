@@ -10,7 +10,12 @@
 
 div.folded {
     padding: 0.5em;
+    padding-bottom: 0;
     border: 1px dotted __medium__;
+}
+
+div.folded.open {
+    border-left: 1px solid #CCC; 
 }
 
 span.folded {

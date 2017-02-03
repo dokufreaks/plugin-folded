@@ -18,6 +18,7 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
      */
     function register(Doku_Event_Handler $controller) {
         $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addhidereveal');
+        $controller->register_hook('TPL_CONTENT_DISPLAY', 'BEFORE', $this, 'rewriteTitle', array());
     }
 
     /**
@@ -36,5 +37,60 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
             'hide' => $hide,
             'reveal' => $reveal
         );
+    }
+
+    /**
+     * Rewrite the tags for the titles
+     *
+     * @param Doku_Event $event  The event
+     * @param array      $params The parameters for the event
+     */
+    function rewriteTitle($event, $params) {
+        // Each title matched is splitted in an array like this:
+        //     array {
+        //         [1] => <p>
+        //         [2] => any of \w\d\s\n between zero or unlimited times
+        //         [3] => = between one or unlimited times
+        //         [4] => title
+        //         [5] => = between one or unlimited times
+        //         [6] => any of \w\d\s\n between zero or unlimited times
+        //         [7] => </p>
+        //     }
+        // The relation between the number of equal signs (=) and the relative
+        // tag <h*> is the following:
+        //    <h1>  | <h2>  | <h3>  | <h4>  | <h5>
+        //    = * 6 | = * 5 | = * 4 | = * 3 | = * 2
+        $re = '/(<p>)([\w\d\s\n]*)([=]+)(.*?)([=]+)([\w\d\s\n]*)(<\/p>)/';
+
+        function rewriteTagTitle($match) {
+            $level = array (
+                '======' => '1',
+                '=====' => '2',
+                '====' => '3',
+                '===' => '4',
+                '==' => '5'
+            );
+            if ($match[3] === $match[5]) {
+                if (ctype_graph($match[2]) == true) {
+                    $match[2] = $match[2] . '</p>';
+                }
+                else {
+                    $match[1] = '';
+                    $match[2] = '';
+                }
+                $match[3] = '<h' . $level[$match[3]] . '>';
+                $match[5] = '</h' . $level[$match[5]] . '>';
+                if (ctype_graph($match[6]) == true) {
+                    $match[6] = '<p>' . $match[6];
+                }
+                else {
+                    $match[6] = '';
+                    $match[7] = '';
+                }
+            }
+            return $match[1] . $match[2] . $match[3] . $match[4] . $match[5] . $match[6] . $match[7];
+        }
+
+        $event->data = preg_replace_callback($re, 'rewriteTagTitle', $event->data);
     }
 }
