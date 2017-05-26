@@ -14,6 +14,7 @@
 jQuery(function() {
     // containers for localised reveal/hide strings,
     // populated from the content set by the action plugin
+    if(!JSINFO || !JSINFO['plugin_folded']) return;
     var folded_reveal = JSINFO['plugin_folded']['reveal'];
     var folded_hide = JSINFO['plugin_folded']['hide'];
 
