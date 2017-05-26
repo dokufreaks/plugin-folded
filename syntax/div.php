@@ -61,12 +61,20 @@ class syntax_plugin_folded_div extends DokuWiki_Syntax_Plugin {
             switch ($state){
               case DOKU_LEXER_ENTER:
                 $plugin_folded_count++;
-                $renderer->doc .= '<p><a class="folder" href="#folded_'.$plugin_folded_count.'">';
+                if ($this->getConf('unfold_default')) {
+                    $renderer->doc .= '<p><a class="folder open" href="#folded_'.$plugin_folded_count.'">';
+                } else {
+                    $renderer->doc .= '<p><a class="folder" href="#folded_'.$plugin_folded_count.'">';
+                }
 
                 if ($cdata)
                     $renderer->doc .= ' '.$renderer->cdata($cdata);
 
-                $renderer->doc .= '</a></p><div class="folded hidden" id="folded_'.$plugin_folded_count.'">';
+                if ($this->getConf('unfold_default')) {
+                    $renderer->doc .= '</a></p><div class="folded" id="folded_'.$plugin_folded_count.'">';
+                } else {
+                    $renderer->doc .= '</a></p><div class="folded hidden" id="folded_'.$plugin_folded_count.'">';
+                }
                 break;
 
               case DOKU_LEXER_UNMATCHED:                            // defensive, shouldn't occur
