@@ -64,5 +64,4 @@ class action_plugin_folded extends DokuWiki_Action_Plugin {
                                     array_slice($event->data['items'], -1 , 1, true);
         }
     }
-
 }
