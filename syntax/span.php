@@ -8,9 +8,8 @@
  * @author     Esther Brunner <esther@kaffeehaus.ch>
  */
 
-if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
+// must be run within DokuWiki
+if(!defined('DOKU_INC')) die();
 
 // maintain a global count of the number of folded elements in the page, 
 // this allows each to be uniquely identified
