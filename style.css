@@ -10,11 +10,11 @@
 
 div.folded {
     padding: 0.5em;
-    border: 1px dotted __medium__;
+    border: 1px dotted __border__;
 }
 
 span.folded {
-    border: 1px dotted __medium__;
+    border: 1px dotted __border__;
 }
 
 span.indicator {
