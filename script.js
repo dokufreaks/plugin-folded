@@ -46,15 +46,16 @@ jQuery(function() {
 });
 
 function fold_unfold_all() {
+    var i;
     var hide = -1;
     var cpt = 1;
+    var elements;
 
-    var folders = document.getElementsByClassName("folder");
-    var i;
-    for (i = 0; i < folders.length; i++) {
+    elements = document.getElementsByClassName("folder");
+    for (i = 0; i < elements.length; i++) {
         // initially, find out whether we want to hide or unhide
         if (hide == -1) {
-            if (folders[i].className.search("open") == -1) {
+            if (elements[i].className.search("open") == -1) {
                 hide = 0;
             } else {
                 hide = 1;
@@ -62,26 +63,23 @@ function fold_unfold_all() {
         }
 
         if (hide == 1) {
-            folders[i].className = folders[i].className.replace(/open/g, "");
+            elements[i].className = elements[i].className.replace(/open/g, "");
         } else {
-            folders[i].className = folders[i].className + " open";
+            elements[i].className = elements[i].className + " open";
         }
 
     }
 
-    // get first folded_ object
-    var obj = document.getElementById("folded_" + cpt++);
-    while ( obj != null ) {
+    // get folded elements
+    elements = document.getElementsByClassName("folded");
+    for (i = 0; i < elements.length; i++) {
         if (hide == 1) {
-            obj.className = obj.className.replace(/open/g, "");
-            obj.className = obj.className + " hidden";
+            elements[i].className = elements[i].className.replace(/open/g, "");
+            elements[i].className = elements[i].className + " hidden";
         } else {
-            obj.className = obj.className.replace(/hidden/g, "");
-            obj.className = obj.className + " open";
+            elements[i].className = elements[i].className.replace(/hidden/g, "");
+            elements[i].className = elements[i].className + " open";
         }
-
-        // get next folded_ object
-        obj = document.getElementById("folded_" + cpt++);
     }
 }
 
