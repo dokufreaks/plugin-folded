@@ -25,8 +25,8 @@ jQuery(function() {
      * title tooltip on the folding link
      */
     jQuery('.dokuwiki .folder').click(function folded_toggle(evt) {
-        var id = this.href.match(/(#.*)$/)[1];
-        var $id = jQuery(id);
+        var id = this.href.match(/#(.*)$/)[1];
+        var $id = jQuery(document.getElementById(id));
 
         if ($id.hasClass('hidden')) {
             $id.addClass('open').removeClass('hidden');
