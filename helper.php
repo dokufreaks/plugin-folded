@@ -25,8 +25,9 @@ class helper_plugin_folded extends DokuWiki_Plugin {
     function getNextID() {
         global $ID;
 
+        $hash = md5($ID);
         $this->ids_count++;
-        $id = 'folded_'.$ID.'_'.$this->ids_count;
+        $id = 'folded_'.$hash.'_'.$this->ids_count;
         return $id;
     }
 }
