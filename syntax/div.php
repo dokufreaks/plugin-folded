@@ -21,7 +21,7 @@ if (!isset($plugin_folded_string_set)) $plugin_folded_string_set = false;
  * need to inherit from this class
  */
 class syntax_plugin_folded_div extends DokuWiki_Syntax_Plugin {
-    protected $helper = NULL;
+    protected $helper = null;
 
     function getType(){ return 'container'; }
     function getPType() { return 'stack'; }
@@ -53,7 +53,7 @@ class syntax_plugin_folded_div extends DokuWiki_Syntax_Plugin {
         if($mode == 'xhtml') {
             switch ($state){
               case DOKU_LEXER_ENTER:
-                if ($this->helper === NULL) {
+                if ($this->helper === null) {
                     $this->helper = plugin_load('helper', 'folded');
                 }
                 $folded_id = $this->helper->getNextID();
