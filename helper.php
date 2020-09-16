@@ -23,16 +23,9 @@ class helper_plugin_folded extends DokuWiki_Plugin {
      * Returns the next folded ID.
      */
     function getNextID() {
-        global $ID;
+        global $ID, $ACT;
 
-        $router = \dokuwiki\ActionRouter::getInstance();
-        try {
-            $action = '!!!'.$router->getAction()->getActionName().'!!!';
-        } catch(\dokuwiki\Action\Exception\FatalException $e) {
-            $action = '';
-        }
-
-        $hash = md5($ID.$action);
+        $hash = md5($ID.$ACT);
         $this->ids_count++;
         $id = 'folded_'.$hash.'_'.$this->ids_count;
         return $id;
