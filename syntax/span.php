@@ -8,14 +8,6 @@
  * @author     Esther Brunner <esther@kaffeehaus.ch>
  */
 
-// must be run within DokuWiki
-if(!defined('DOKU_INC')) die();
-
-// global used to indicate that the localised folder link title tooltips 
-// strings have been written out
-global $plugin_folded_strings_set;
-if (!isset($plugin_folded_string_set)) $plugin_folded_string_set = false;
-
 /**
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
