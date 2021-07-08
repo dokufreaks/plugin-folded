@@ -47,3 +47,18 @@ span.indicator {
 .folded.hidden { display: none; }
 .folder span.indicator { visibility: visible; }
 */
+
+/* This classes used to mark currently loaded link in the foldable block */
+.folded.open li.active a {
+    color:#FFFFFF!important;
+    font-weight: bold;
+}
+.folded.open li.active a:before {
+    content: "\f0da";
+    font: normal normal normal 36px/1 FontAwesome;
+    font-size: 36px;
+    color: #446e9b!important;
+    position: absolute;
+    right: -11px;
+    top: calc(~"50% - "18px);
+}
