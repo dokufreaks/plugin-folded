@@ -43,7 +43,7 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
         if($mode == 'xhtml') {
             switch ($state){
                case DOKU_LEXER_ENTER:
-                if ($this->helper === null) {
+                if (!isset($this->helper)) {
                     $this->helper = plugin_load('helper', 'folded');
                 }
                 $folded_id = $this->helper->getNextID();
