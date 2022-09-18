@@ -5,8 +5,6 @@
  */
 
 class helper_plugin_folded extends DokuWiki_Plugin {
-    static protected $ids_count = 0;
-
     function getMethods() {
         $result = array();
         $result[] = array(
@@ -20,6 +18,7 @@ class helper_plugin_folded extends DokuWiki_Plugin {
      * Returns the next folded ID.
      */
     function getNextID() {
+        static $ids_count = 0;
         global $ID, $ACT;
 
         $hash = md5($ID.$ACT);

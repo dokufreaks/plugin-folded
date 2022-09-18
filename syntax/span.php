@@ -14,6 +14,9 @@
  */
 class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
 
+    /** @var helper_plugin_folded */
+    protected $helper = null;
+
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('substition','protected','disabled','formatting'); }
     function getSort(){ return 405; }
