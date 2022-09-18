@@ -14,6 +14,9 @@
  */
 class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
 
+    /** @var helper_plugin_folded */
+    protected $helper = null;
+
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('substition','protected','disabled','formatting'); }
     function getSort(){ return 405; }
@@ -43,7 +46,7 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
         if($mode == 'xhtml') {
             switch ($state){
                case DOKU_LEXER_ENTER:
-                if (!isset($this->helper)) {
+                if ($this->helper === null) {
                     $this->helper = plugin_load('helper', 'folded');
                 }
                 $folded_id = $this->helper->getNextID();
