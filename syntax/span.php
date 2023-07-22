@@ -30,7 +30,7 @@ class syntax_plugin_folded_span extends DokuWiki_Syntax_Plugin {
         if ($state == DOKU_LEXER_ENTER){
             $match = trim(substr($match,2,-1)); // strip markup
         } else if ($state == DOKU_LEXER_UNMATCHED) {
-            $handler->_addCall('cdata',array($match), $pos);
+            $handler->addCall('cdata',array($match), $pos);
             return false;
         }
         return array($state, $match);
