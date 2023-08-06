@@ -43,6 +43,25 @@ jQuery(function() {
         evt.preventDefault();
         return false;
     });
+    // unfold block if it contans link to the current page
+    jQuery('.dokuwiki .folder').each(function(){
+        var $a = jQuery(this);
+        var id = this.href.match(/#(.*)$/)[1];
+        var $folderContent = jQuery(document.getElementById(id));
+
+        if ($folderContent.hasClass('hidden')) {
+            $folderContent.find('a').each(function(){
+                var $current = jQuery(this);
+                var href = $current.attr('href');
+                if(document.location.pathname == href || document.location.href == href){
+                    $folderContent.addClass('open').removeClass('hidden');
+                    $a.addClass('open').attr('title', folded_hide);
+                    $current.parents('li').addClass('active');
+                    return false;
+             }
+            });
+        }
+    });
 });
 
 function fold_unfold_all() {
